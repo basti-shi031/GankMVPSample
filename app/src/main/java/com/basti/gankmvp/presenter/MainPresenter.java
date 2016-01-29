@@ -1,6 +1,7 @@
 package com.basti.gankmvp.presenter;
 
 import android.content.Context;
+import android.util.Log;
 
 import com.basti.gankmvp.http.BastiGankClient;
 import com.basti.gankmvp.model.GankData;
@@ -38,6 +39,7 @@ public class MainPresenter extends BasePresenter<IMainView>{
                 .subscribe(new Action1<MeiziData>() {
                     @Override
                     public void call(MeiziData meiziData) {
+                        Log.i("TAG","call");
                         if (meiziData.getMeiziList().size() == 0 ){
                             mView.showNoMoreData();
                         }else {

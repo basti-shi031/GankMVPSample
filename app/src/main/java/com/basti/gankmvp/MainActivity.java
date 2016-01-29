@@ -70,7 +70,7 @@ public class MainActivity extends ToolBarActivity<MainPresenter> implements IMai
 
     @Override
     public void showErrorView() {
-
+Log.i("TAG","showError");
     }
 
     @Override
@@ -80,7 +80,18 @@ public class MainActivity extends ToolBarActivity<MainPresenter> implements IMai
 
     @Override
     public void showMeiziList(List<Meizi> meiziList) {
-        Log.i("TAG",meiziList.size()+"");
+        canLoading = true;
+        page++;
+        if (isRefresh) {
+            //SPDataUtil.saveFirstPageGirls(this, meiziList);
+            meizis.clear();
+            meizis.addAll(meiziList);
+            adapter.notifyDataSetChanged();
+            isRefresh = false;
+        } else {
+            meizis.addAll(meiziList);
+            adapter.notifyDataSetChanged();
+        }
     }
 
     @Override
@@ -95,13 +106,15 @@ public class MainActivity extends ToolBarActivity<MainPresenter> implements IMai
 
         swipeRefreshLayout.setColorSchemeColors(R.color.colorPrimary, R.color.colorAccent, R.color.blue);
         swipeRefreshLayout.setOnRefreshListener(this);
-        swipeRefreshLayout.post(new Runnable() {
+        /*swipeRefreshLayout.post(new Runnable() {
             @Override
             public void run() {
                 swipeRefreshLayout.setRefreshing(true);
                 presenter.fetchMeiziData(page);
             }
-        });
+        });*/
+        swipeRefreshLayout.setRefreshing(true);
+        presenter.fetchMeiziData(page);
     }
 
     @Override
