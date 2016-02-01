@@ -1,5 +1,6 @@
 package com.basti.gankmvp.http;
 
+import com.basti.gankmvp.model.DailyData;
 import com.basti.gankmvp.model.GankData;
 import com.basti.gankmvp.model.MeiziData;
 
@@ -20,7 +21,7 @@ public interface BastiGankRetrofit {
     Observable<GankData> getGankData(@Path("page") int page);
 
     @GET("day/{year}/{month}/{day}")
-    Observable<GankData> getDailyData(
+    Observable<DailyData> getDailyData(
             @Path("year") int year,
             @Path("month") int month,
             @Path("day") int day);

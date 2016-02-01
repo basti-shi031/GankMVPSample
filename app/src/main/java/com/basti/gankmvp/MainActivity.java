@@ -6,9 +6,7 @@ import android.support.v4.widget.SwipeRefreshLayout;
 import android.support.v7.widget.LinearLayoutManager;
 import android.support.v7.widget.OrientationHelper;
 import android.support.v7.widget.StaggeredGridLayoutManager;
-import android.support.v7.widget.Toolbar;
 import android.util.Log;
-import android.view.View;
 
 import com.basti.gankmvp.model.Meizi;
 import com.basti.gankmvp.presenter.MainPresenter;
@@ -103,6 +101,7 @@ public class MainActivity extends ToolBarActivity<MainPresenter> implements IMai
         //mRecyclerView.setLayoutManager(new LinearLayoutManager(this));
         mRecyclerView.setAdapter(adapter);
         mRecyclerView.setLoadMoreListener(this);
+        mRecyclerView.setFloatingActionButton(mFab);
 
         swipeRefreshLayout.setColorSchemeColors(R.color.colorPrimary, R.color.colorAccent, R.color.blue);
         swipeRefreshLayout.setOnRefreshListener(this);

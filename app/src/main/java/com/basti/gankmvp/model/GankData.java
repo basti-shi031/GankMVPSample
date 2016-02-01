@@ -10,11 +10,4 @@ public class GankData extends BaseData{
 
     public List<Gank> results =  new ArrayList<>();
 
-    /*public List<Gank> getGankData() {
-        return gankData;
-    }*/
-
-    /*public void setGankData(List<Gank> gankData) {
-        this.gankData = gankData;
-    }*/
 }

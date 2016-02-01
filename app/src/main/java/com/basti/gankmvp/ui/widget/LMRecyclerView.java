@@ -1,6 +1,7 @@
 package com.basti.gankmvp.ui.widget;
 
 import android.content.Context;
+import android.support.design.widget.FloatingActionButton;
 import android.support.v7.widget.GridLayoutManager;
 import android.support.v7.widget.LinearLayoutManager;
 import android.support.v7.widget.RecyclerView;
@@ -15,6 +16,7 @@ public class LMRecyclerView extends RecyclerView {
 
     private LoadMoreListener mListener;
     private boolean scrollToBottom = true;
+    private FloatingActionButton mFab;
 
     public interface LoadMoreListener {
         void loadMore();
@@ -39,6 +41,22 @@ public class LMRecyclerView extends RecyclerView {
     @Override
     public void onScrolled(int dx, int dy) {
         scrollToBottom = dy > 0;
+
+        if (mFab != null){
+            if(scrollToBottom){
+                if (mFab.isShown()){
+                    mFab.hide();
+                }
+                }else {
+                if (!mFab.isShown())
+                    mFab.show();
+            }
+        }
+
+    }
+
+    public void setFloatingActionButton(FloatingActionButton fab){
+        mFab = fab;
     }
 
     @Override

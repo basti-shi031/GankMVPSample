@@ -31,23 +31,23 @@ public class BastiGankClient {
 
     public static BastiGankRetrofit getBastiGankRetrofit(){
 
-        /*//if (bastiGankRetrofit == null){
-            //synchronized (BastiGankRetrofit.class){
+        if (bastiGankRetrofit == null){
+            synchronized (BastiGankRetrofit.class){
                 if (bastiGankRetrofit == null){
                     bastiGankRetrofit = retrofit.create(BastiGankRetrofit.class);
                 }
-           // }
-        //}*/
+            }
+        }
 
-        synchronized (monitor) {
+       /* synchronized (monitor) {
             if (bastiGankRetrofit == null) {
                 bastiGankRetrofit = retrofit.create(BastiGankRetrofit.class);
             }
             return bastiGankRetrofit;
-        }
+        }*/
 
 
-       // return bastiGankRetrofit;
+        return bastiGankRetrofit;
     }
 
 }

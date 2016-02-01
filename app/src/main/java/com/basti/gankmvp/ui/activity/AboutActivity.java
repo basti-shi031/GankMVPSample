@@ -16,8 +16,6 @@ import butterknife.OnClick;
  */
 public class AboutActivity extends ToolBarActivity<AboutPresenter> implements IBaseView {
 
-    @Bind(R.id.star)
-    Button star;
 
     @Override
     protected void initPresenter() {
@@ -25,10 +23,6 @@ public class AboutActivity extends ToolBarActivity<AboutPresenter> implements IB
         presenter.initPresenter();
     }
 
-    @OnClick(R.id.star)
-    void startInMarket(){
-        presenter.starInMarket();
-    }
 
     @Override
     protected int provideContentViewId() {
