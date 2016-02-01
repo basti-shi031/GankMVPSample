@@ -5,7 +5,7 @@ import java.util.Date;
 /**
  * Created by SHIBW-PC on 2016/1/29.
  */
-public class Gank {
+public class Gank extends Fundation{
 
     public boolean used;
     public String type;

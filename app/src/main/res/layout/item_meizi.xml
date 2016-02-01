@@ -5,7 +5,7 @@
     android:layout_margin="5dp"
     android:orientation="vertical">
 
-    <com.smartalk.gank.ui.widget.SquareImageView
+    <com.basti.gankmvp.ui.widget.SquareImageView
         android:id="@+id/iv_meizi"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"

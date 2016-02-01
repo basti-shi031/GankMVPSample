@@ -4,8 +4,11 @@ import android.os.Bundle;
 import android.support.design.widget.FloatingActionButton;
 import android.support.v4.widget.SwipeRefreshLayout;
 import android.support.v7.widget.LinearLayoutManager;
+import android.support.v7.widget.OrientationHelper;
+import android.support.v7.widget.StaggeredGridLayoutManager;
 import android.support.v7.widget.Toolbar;
 import android.util.Log;
+import android.view.View;
 
 import com.basti.gankmvp.model.Meizi;
 import com.basti.gankmvp.presenter.MainPresenter;
@@ -19,7 +22,7 @@ import java.util.List;
 
 import butterknife.Bind;
 
-public class MainActivity extends ToolBarActivity<MainPresenter> implements IMainView, SwipeRefreshLayout.OnRefreshListener {
+public class MainActivity extends ToolBarActivity<MainPresenter> implements IMainView, SwipeRefreshLayout.OnRefreshListener, LMRecyclerView.LoadMoreListener {
 
     @Bind(R.id.recycler_view)
     LMRecyclerView mRecyclerView;
@@ -35,16 +38,17 @@ public class MainActivity extends ToolBarActivity<MainPresenter> implements IMai
     private int page = 1;
     private boolean isRefresh = true;
     private boolean canLoading = true;
+    private FloatingActionButton fab;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
-        setContentView(R.layout.activity_main);
+
     }
 
     @Override
     protected void initPresenter() {
-        presenter = new MainPresenter(this,this);
+        presenter = new MainPresenter(this, this);
         presenter.initPresenter();
     }
 
@@ -60,59 +64,49 @@ public class MainActivity extends ToolBarActivity<MainPresenter> implements IMai
 
     @Override
     public void showProgressView() {
-
+        swipeRefreshLayout.setRefreshing(true);
     }
 
     @Override
     public void hideProgressView() {
-
+        swipeRefreshLayout.setRefreshing(false);
     }
 
     @Override
-    public void showErrorView() {
-Log.i("TAG","showError");
+    public void showErrorView(Throwable throwable) {
+        Log.i("TAG", throwable.toString());
     }
 
     @Override
     public void showNoMoreData() {
-
+        Log.i("TAG", "showNoMoreData");
     }
 
     @Override
     public void showMeiziList(List<Meizi> meiziList) {
         canLoading = true;
-        page++;
-        if (isRefresh) {
-            //SPDataUtil.saveFirstPageGirls(this, meiziList);
+        if (isRefresh){
             meizis.clear();
-            meizis.addAll(meiziList);
-            adapter.notifyDataSetChanged();
-            isRefresh = false;
-        } else {
-            meizis.addAll(meiziList);
-            adapter.notifyDataSetChanged();
         }
+        meizis.addAll(meiziList);
+        adapter.notifyDataSetChanged();
     }
 
     @Override
     public void init() {
 
-        if (meizis == null){
+        if (meizis == null) {
             meizis = new ArrayList<>();
         }
-        adapter = new MeiziAdapter(meizis,this);
-        mRecyclerView.setLayoutManager(new LinearLayoutManager(this));
+        adapter = new MeiziAdapter(meizis, this);
+        mRecyclerView.setLayoutManager(new StaggeredGridLayoutManager(2, OrientationHelper.VERTICAL));
+        //mRecyclerView.setLayoutManager(new LinearLayoutManager(this));
         mRecyclerView.setAdapter(adapter);
+        mRecyclerView.setLoadMoreListener(this);
 
         swipeRefreshLayout.setColorSchemeColors(R.color.colorPrimary, R.color.colorAccent, R.color.blue);
         swipeRefreshLayout.setOnRefreshListener(this);
-        /*swipeRefreshLayout.post(new Runnable() {
-            @Override
-            public void run() {
-                swipeRefreshLayout.setRefreshing(true);
-                presenter.fetchMeiziData(page);
-            }
-        });*/
+
         swipeRefreshLayout.setRefreshing(true);
         presenter.fetchMeiziData(page);
     }
@@ -124,6 +118,15 @@ Log.i("TAG","showError");
 
     @Override
     public void onRefresh() {
+        isRefresh = true;
+        page = 1;
+        presenter.fetchMeiziData(page);
+    }
 
+    @Override
+    public void loadMore() {
+        isRefresh = false;
+        page++;
+        presenter.fetchMeiziData(page);
     }
 }

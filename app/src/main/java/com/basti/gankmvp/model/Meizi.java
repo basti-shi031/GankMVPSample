@@ -6,7 +6,7 @@ import java.util.Date;
  * 首页Meizi数据类型
  * Created by SHIBW-PC on 2016/1/29.
  */
-public class Meizi {
+public class Meizi extends Fundation{
 
     public String who;
     public String url;

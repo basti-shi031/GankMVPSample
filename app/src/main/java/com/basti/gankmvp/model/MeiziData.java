@@ -1,5 +1,6 @@
 package com.basti.gankmvp.model;
 
+import java.util.ArrayList;
 import java.util.List;
 
 /**
@@ -7,13 +8,13 @@ import java.util.List;
  */
 public class MeiziData extends BaseData {
 
-    List<Meizi> meiziList;
+    public List<Meizi> results = new ArrayList<>();
 
-    public List<Meizi> getMeiziList() {
+/*    public List<Meizi> getMeiziList() {
         return meiziList;
     }
 
     public void setMeiziList(List<Meizi> meiziList) {
         this.meiziList = meiziList;
-    }
+    }*/
 }

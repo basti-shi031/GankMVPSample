@@ -5,6 +5,6 @@ package com.basti.gankmvp.model;
  */
 public class BaseData {
 
-    private boolean error;
+    public boolean error = true;
 
 }

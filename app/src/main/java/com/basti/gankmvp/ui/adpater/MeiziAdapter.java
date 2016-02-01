@@ -16,6 +16,7 @@ import java.util.List;
 
 import butterknife.Bind;
 import butterknife.ButterKnife;
+import butterknife.OnClick;
 
 /**
  * Created by SHIBW-PC on 2016/1/29.
@@ -51,7 +52,7 @@ public class MeiziAdapter extends RecyclerView.Adapter<MeiziAdapter.MyViewHolder
         holder.tvWho.setText(meizi.who);
         holder.tvAvatar.setText(meizi.who.substring(0, 1).toUpperCase());
         holder.tvDesc.setText(meizi.desc);
-        holder.tvTime.setText((CharSequence) meizi.publishedAt);
+        //holder.tvTime.setText((CharSequence) meizi.publishedAt);
         holder.tvAvatar.setVisibility(View.GONE);
         //showItemAnimation(holder, position);
     }
@@ -75,6 +76,11 @@ public class MeiziAdapter extends RecyclerView.Adapter<MeiziAdapter.MyViewHolder
         TextView tvTime;
 
         View card;
+
+        @OnClick(R.id.rl_gank)
+        void gankClick(){
+
+        }
 
         public MyViewHolder(View itemView) {
             super(itemView);

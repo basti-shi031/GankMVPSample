@@ -1,8 +1,10 @@
 package com.basti.gankmvp.ui.widget;
 
 import android.content.Context;
+import android.support.v7.widget.GridLayoutManager;
 import android.support.v7.widget.LinearLayoutManager;
 import android.support.v7.widget.RecyclerView;
+import android.support.v7.widget.StaggeredGridLayoutManager;
 import android.util.AttributeSet;
 
 /**
@@ -13,7 +15,8 @@ public class LMRecyclerView extends RecyclerView {
 
     private LoadMoreListener mListener;
     private boolean scrollToBottom = true;
-    public  interface LoadMoreListener{
+
+    public interface LoadMoreListener {
         void loadMore();
     }
 
@@ -29,7 +32,7 @@ public class LMRecyclerView extends RecyclerView {
         super(context, attrs, defStyle);
     }
 
-    public void setLoadMoreListener(LoadMoreListener loadMoreListener){
+    public void setLoadMoreListener(LoadMoreListener loadMoreListener) {
         mListener = loadMoreListener;
     }
 
@@ -40,17 +43,33 @@ public class LMRecyclerView extends RecyclerView {
 
     @Override
     public void onScrollStateChanged(int state) {
-        LinearLayoutManager layoutManager = (LinearLayoutManager) getLayoutManager();
-        //空闲状态
-        if (state == RecyclerView.SCROLL_STATE_IDLE){
-            int lastVisibleItem = layoutManager.findLastCompletelyVisibleItemPosition();
-            int totalItemCount = layoutManager.getItemCount();
-            if (lastVisibleItem == totalItemCount-1 && scrollToBottom){
-                if (mListener != null){
-                    mListener.loadMore();
+
+        if (getLayoutManager() instanceof LinearLayoutManager) {
+            LinearLayoutManager layoutManager = (LinearLayoutManager) getLayoutManager();
+            //空闲状态
+            if (state == RecyclerView.SCROLL_STATE_IDLE) {
+                int lastVisibleItem = layoutManager.findLastCompletelyVisibleItemPosition();
+                int totalItemCount = layoutManager.getItemCount();
+                if (lastVisibleItem == totalItemCount - 1 && scrollToBottom) {
+                    if (mListener != null) {
+                        mListener.loadMore();
+                    }
                 }
             }
+        } else if (getLayoutManager() instanceof StaggeredGridLayoutManager) {
+            StaggeredGridLayoutManager layoutManager = (StaggeredGridLayoutManager) getLayoutManager();
 
+            if (state == RecyclerView.SCROLL_STATE_IDLE) {
+                int[] lastVisibleItems = new int[2];
+                lastVisibleItems = layoutManager.findLastCompletelyVisibleItemPositions(lastVisibleItems);
+                int lastVisibleItem = Math.max(lastVisibleItems[0],lastVisibleItems[1]);
+                int totalItemCount = layoutManager.getItemCount();
+                if (lastVisibleItem == totalItemCount - 1 && scrollToBottom) {
+                    if (mListener != null) {
+                        mListener.loadMore();
+                    }
+                }
+            }
         }
     }
 }

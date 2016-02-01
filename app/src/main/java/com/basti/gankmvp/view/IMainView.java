@@ -13,7 +13,7 @@ public interface IMainView extends IBaseView {
 
     void showProgressView();
     void hideProgressView();
-    void showErrorView();
+    void showErrorView(Throwable throwable);
     void showNoMoreData();
     void showMeiziList(List<Meizi> meiziList);
 

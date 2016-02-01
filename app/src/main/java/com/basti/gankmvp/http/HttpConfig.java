@@ -5,6 +5,6 @@ package com.basti.gankmvp.http;
  */
 public class HttpConfig {
 
-    public static final int MEIZIDATASIZE = 20;//每页请求数据
+    public static final int MEIZIDATASIZE = 6;//每页请求数据
 
 }

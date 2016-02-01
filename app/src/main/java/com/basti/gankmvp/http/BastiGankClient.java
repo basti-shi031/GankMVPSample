@@ -15,7 +15,7 @@ public class BastiGankClient {
     public static final String HOST = "http://gank.avosapps.com/api/";
     private static BastiGankRetrofit bastiGankRetrofit;
     private static Retrofit retrofit;
-
+    protected static final Object monitor = new Object();
     static {
         Gson gson = new GsonBuilder()
                 .setDateFormat("yyyy-MM-dd'T'HH:mm:ss.SSS'Z'")
@@ -31,15 +31,23 @@ public class BastiGankClient {
 
     public static BastiGankRetrofit getBastiGankRetrofit(){
 
-        if (bastiGankRetrofit == null){
-            synchronized (BastiGankRetrofit.class){
+        /*//if (bastiGankRetrofit == null){
+            //synchronized (BastiGankRetrofit.class){
                 if (bastiGankRetrofit == null){
                     bastiGankRetrofit = retrofit.create(BastiGankRetrofit.class);
                 }
+           // }
+        //}*/
+
+        synchronized (monitor) {
+            if (bastiGankRetrofit == null) {
+                bastiGankRetrofit = retrofit.create(BastiGankRetrofit.class);
             }
+            return bastiGankRetrofit;
         }
 
-        return bastiGankRetrofit;
+
+       // return bastiGankRetrofit;
     }
 
 }

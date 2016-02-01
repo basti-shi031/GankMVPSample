@@ -1,5 +1,6 @@
 package com.basti.gankmvp.model;
 
+import java.util.ArrayList;
 import java.util.List;
 
 /**
@@ -7,13 +8,13 @@ import java.util.List;
  */
 public class GankData extends BaseData{
 
-    private List<Gank> gankData;
+    public List<Gank> results =  new ArrayList<>();
 
-    public List<Gank> getGankData() {
+    /*public List<Gank> getGankData() {
         return gankData;
-    }
+    }*/
 
-    public void setGankData(List<Gank> gankData) {
+    /*public void setGankData(List<Gank> gankData) {
         this.gankData = gankData;
-    }
+    }*/
 }
