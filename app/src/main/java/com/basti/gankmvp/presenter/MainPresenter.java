@@ -1,11 +1,13 @@
 package com.basti.gankmvp.presenter;
 
 import android.content.Context;
+import android.content.Intent;
 import android.util.Log;
 
 import com.basti.gankmvp.http.BastiGankClient;
 import com.basti.gankmvp.model.GankData;
 import com.basti.gankmvp.model.MeiziData;
+import com.basti.gankmvp.ui.activity.StarActivity;
 import com.basti.gankmvp.view.IMainView;
 
 import rx.Observable;
@@ -68,6 +70,11 @@ public class MainPresenter extends BasePresenter<IMainView> {
         }
 
         return meiziData;
+    }
+
+    public void toStarActivity(){
+        Intent intent = new Intent(mContext, StarActivity.class);
+        mContext.startActivity(intent);
     }
 
     @Override

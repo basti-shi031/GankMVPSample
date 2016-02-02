@@ -19,6 +19,7 @@ import java.util.ArrayList;
 import java.util.List;
 
 import butterknife.Bind;
+import butterknife.OnClick;
 
 public class MainActivity extends ToolBarActivity<MainPresenter> implements IMainView, SwipeRefreshLayout.OnRefreshListener, LMRecyclerView.LoadMoreListener {
 
@@ -31,6 +32,10 @@ public class MainActivity extends ToolBarActivity<MainPresenter> implements IMai
     @Bind(R.id.swipe_refresh_layout)
     SwipeRefreshLayout swipeRefreshLayout;
 
+    @OnClick(R.id.fab)
+    void toStarActivity(){
+        presenter.toStarActivity();
+    }
     private List<Meizi> meizis;
     private MeiziAdapter adapter;
     private int page = 1;

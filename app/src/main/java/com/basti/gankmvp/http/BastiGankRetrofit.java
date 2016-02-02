@@ -14,19 +14,19 @@ import rx.Observable;
  */
 public interface BastiGankRetrofit {
 
-    @GET("data/福利/" + HttpConfig.MEIZIDATASIZE+"/{page}")
+    @GET("data/福利/" + HttpConfig.MEIZIDATASIZE + "/{page}")
     Observable<MeiziData> fetchMeiziData(@Path("page") int page);
 
     @GET("data/休息视频/" + HttpConfig.MEIZIDATASIZE + "/{page}")
     Observable<GankData> getGankData(@Path("page") int page);
 
     @GET("day/{year}/{month}/{day}")
-    Observable<DailyData> getDailyData(
+    Observable<DailyData> fetchDailyData(
             @Path("year") int year,
             @Path("month") int month,
             @Path("day") int day);
 
-    @GET("data/{type}/"+HttpConfig.MEIZIDATASIZE+"/{page}")
-    Observable<GankData> getBatteryData(@Path("type") String type,@Path("page") int page);
+    @GET("data/{type}/" + HttpConfig.GANKDATASIZE + "/{page}")
+    Observable<GankData> fetchTypeData(@Path("type") String type, @Path("page") int page);
 
 }

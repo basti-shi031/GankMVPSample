@@ -5,11 +5,11 @@ import com.basti.gankmvp.model.Gank;
 import java.util.List;
 
 /**
- * Created by SHIBW-PC on 2016/2/1.
+ * Created by SHIBW-PC on 2016/2/2.
  */
-public interface IGankView extends IBaseView {
+public interface IStarView extends IBaseView {
 
-    void showGankListView(List<Gank> listview);
+    void showGankListView(List<Gank> list);
     void showProgressBar();
     void hideProgressBar();
     void showErrorView();
