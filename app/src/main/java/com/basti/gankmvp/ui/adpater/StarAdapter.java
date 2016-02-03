@@ -1,6 +1,7 @@
 package com.basti.gankmvp.ui.adpater;
 
 import android.content.Context;
+import android.content.Intent;
 import android.support.v7.widget.RecyclerView;
 import android.view.LayoutInflater;
 import android.view.View;
@@ -9,6 +10,7 @@ import android.widget.TextView;
 
 import com.basti.gankmvp.R;
 import com.basti.gankmvp.model.Gank;
+import com.basti.gankmvp.ui.activity.WebViewActivity;
 import com.basti.gankmvp.utils.StringStyleUtil;
 
 import java.util.List;
@@ -24,6 +26,7 @@ public class StarAdapter extends RecyclerView.Adapter<StarAdapter.StarViewHolder
 
     private List<Gank> mGankList;
     private Context mContext;
+    public static final String WEBTAG = "web";
 
     public StarAdapter(List<Gank> gankList,Context context){
         mGankList = gankList;
@@ -55,6 +58,9 @@ public class StarAdapter extends RecyclerView.Adapter<StarAdapter.StarViewHolder
         @OnClick(R.id.ll_battery)
         void toWebClick(){
             //WebActivity.loadWebViewActivity(context,(Gank)tvBattery.getTag());
+            Intent intent = new Intent(mContext, WebViewActivity.class);
+            intent.putExtra(WEBTAG,(Gank)tvBattery.getTag());
+            mContext.startActivity(intent);
         }
 
         public StarViewHolder(View itemView) {
